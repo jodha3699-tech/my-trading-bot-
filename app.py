@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 import yfinance as yf
-
+import time
 st.title("🚀 500x Gold-Mean Quant Dashboard")
 
 if 'running' not in st.session_state:
@@ -9,6 +9,7 @@ if 'running' not in st.session_state:
 
 def run_trading_bot():
     ticker = "SPY"
+    time.sleep(2)
     data = yf.Ticker(ticker).history(period="1d", interval="15m")
     current_price = data['Close'].iloc[-1]
     sma20 = data['Close'].rolling(window=20).mean().iloc[-1]
