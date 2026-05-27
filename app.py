@@ -1,38 +1,34 @@
 import streamlit as st
-import time
 import yfinance as yf
+import smtplib
 import time
-st.title("🚀 500x Gold-Mean Quant Dashboard")
-
-if 'running' not in st.session_state:
-    st.session_state.running = False
-
-def run_trading_bot():
-    ticker = "SPY"
-    time.sleep(2)
-    data = yf.Ticker(ticker).history(period="1d", interval="15m")
-    current_price = data['Close'].iloc[-1]
-    sma20 = data['Close'].rolling(window=20).mean().iloc[-1]
-    
-    st.write(f"📈 Current Price of {ticker}: ${current_price:.2f}")
-    st.write(f"📊 SMA 20: ${sma20:.2f}")
-    
-    if current_price < sma20:
-        st.success("🟢 Signal: BUY")
-    else:
-        st.error("🔴 Signal: WAIT")
-
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Start Bot"):
-        st.session_state.running = True
-with col2:
-    if st.button("Stop Bot"):
-        st.session_state.running = False
-
-if st.session_state.running:
-    st.write("📊 Trading is live...")
-    run_trading_bot()
-    time.sleep(5)
-    st.rerun()
-
+from email.message import EmailMessage
+def send_email(subject, body):
+    msg = EmailMessage()
+    msg.set_content(body)
+    msg['Subject'] = subject
+    msg['From'] = "Jodha3699@gmail.com"
+    msg['To'] = "Jodha3699@gmail.com"
+    server = smtplib.SMTP_SSL(jodha1234567...,,)
+    server.login("Jodha3699@gmail.com", "jodha123456..,,,")
+    server.send_message(msg)
+    server.quit()
+st.title("Bitcoin Trading Bot")
+ticker = "BTC-USD"
+time.sleep(2)
+data = yf.Ticker(ticker).history(period="1d", interval="15m")
+current_price = data['Close'].iloc[-1]
+sma_20 = data['Close'].rolling(window=20).mean().iloc[-1]
+st.write(f"Current Price of Bitcoin: ${current_price:.2f}")
+st.write(f"SMA 20: ${sma_20:.2f}")
+entry_price = 60000.00 
+profit = current_price - entry_price
+st.write(f"Unrealized Profit/Loss: ${profit:.2f}"
+if current_price > sma_20:
+    st.success("Signal: BUY"
+    # send_email("Bitcoin Alert", f"BUY Signal! Price: {current_price}")
+elif current_price < sma_20:
+    st.error("Signal: SELL")
+    # send_email("Bitcoin Alert", f"SELL Signal! Price: {current_price}. Profit: {profit}")
+else:
+    st.warning("Signal: WAIT")
